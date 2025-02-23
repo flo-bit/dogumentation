@@ -35,7 +35,10 @@ const { id, headings } = Astro.props;
                   : "text-base-800 dark:text-base-400 hover:text-base-950 dark:hover:text-base-50",
               ]}
             >
-              <a href={config.BASE + "/docs/" + doc.id} class="w-full">
+              <a
+                href={config.BASE + "/docs/" + doc.id}
+                class="w-full sidebar-link"
+              >
                 {doc.data.title}
               </a>
 
@@ -49,7 +52,7 @@ const { id, headings } = Astro.props;
                     (heading: { depth: number; text: string; slug: string }) =>
                       heading.depth === 2 && (
                         <a
-                          class="mt-2.5 text-sm ml-4 text-base-800 dark:text-base-300 hover:text-base-950 dark:hover:text-base-50"
+                          class="mt-2.5 text-sm ml-4 text-base-800 dark:text-base-300 hover:text-base-950 dark:hover:text-base-50 sidebar-link"
                           href={
                             config.BASE + "/docs/" + doc.id + "#" + heading.slug
                           }
@@ -71,3 +74,16 @@ const { id, headings } = Astro.props;
     ))
   }
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // close popover when sidebar link is clicked
+    const sidebarLinks = document.querySelectorAll(".sidebar-link");
+    const popover = document.getElementById("mobile-menu");
+    sidebarLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        popover?.hidePopover();
+      });
+    });
+  });
+</script>
