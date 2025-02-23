@@ -78,7 +78,6 @@ const { title, description, image, id, headings } = Astro.props;
         transition:
           transform 0.1s,
           overlay 0.1s ease-out;
-        inset: unset;
 
         /* Styles while the menu is open */
         &:popover-open {
@@ -101,7 +100,7 @@ const { title, description, image, id, headings } = Astro.props;
     <div
       popover
       id="mobile-menu"
-      class="mobileMenuPopover bg-base-100 dark:bg-base-900 left-0 top-0 h-[100dvh] w-72 block shadow-lg border-r border-base-300 dark:border-base-800"
+      class="mobileMenuPopover inset-auto bg-base-100 dark:bg-base-900 left-0 top-0 h-[100dvh] w-72 block shadow-lg border-r border-base-300 dark:border-base-800"
     >
       <button
         popovertarget="mobile-menu"
