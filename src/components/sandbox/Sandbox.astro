@@ -1,0 +1,34 @@
+---
+import { SandpackCodeEditor } from "./SandpackCodeEditor";
+
+const { folder, active } = Astro.props;
+
+const actualFolder = folder.startsWith("/")
+  ? folder
+  : `/src/examples/${folder}`;
+
+// import as raw
+const files = import.meta.glob(`/src/examples/**`, { as: "raw" });
+
+let loadedFiles: Record<string, { code: string; active: boolean }> = {};
+
+for (const file of Object.keys(files)) {
+  if (!file.startsWith(actualFolder)) continue;
+  console.log(file, active);
+  loadedFiles[file.replace(actualFolder, "")] = {
+    code: await files[file](),
+    active: file.endsWith(active),
+  };
+}
+---
+
+<div class="not-prose h-[600px] md:h-[300px]">
+  <SandpackCodeEditor client:only="react" files={loadedFiles} />
+  <noscript>
+    <div
+      class="text-base-800 dark:text-base-200 text-sm w-full h-full rounded-2xl border border-base-200 dark:border-base-800 p-4"
+    >
+      <p>Interactive code examples only work with JavaScript enabled.</p>
+    </div>
+  </noscript>
+</div>

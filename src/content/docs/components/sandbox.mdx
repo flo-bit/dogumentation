@@ -1,0 +1,29 @@
+---
+title: "Interactive Sandbox"
+description: "Show interactive code examples in your documentation"
+category: "Components"
+---
+
+# Interactive Sandbox
+
+You can show interactive code examples in your documentation with the sandbox component.
+
+
+```astro
+import Sandbox from "$components/sandbox/";
+
+<Sandbox folder="example1" active="Counter.js" />
+```
+
+
+import Sandbox from "$components/sandbox/";
+
+<Sandbox folder="example1" active="Counter.js" />
+
+Your folder **must** be in the `src/examples` folder.
+
+The `active` file is the file that will be shown when the sandbox is opened.
+
+Sandboxes include tailwind and the previews background and text color is set to match the rest of your site 
+(both in dark and light mode). If you add your own styles, be careful to always include a dark and 
+light mode version of your styles by using the `dark:` prefix.

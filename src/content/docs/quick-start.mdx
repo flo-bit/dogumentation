@@ -1,0 +1,59 @@
+---
+title: "Quick Start"
+description: "Learn how to install the template"
+order: 0
+---
+
+# Quick Start
+
+Quick start guide using github pages.
+
+## Fork the repo
+
+Fork the repo, naming it depending on where you want to it to show up.
+
+If you want to host it on `yourusername.github.io` then name the repo `yourusername.github.io`.
+
+Otherwise, name it something like `my-docs` and it will be hosted at `yourusername.github.io/my-docs`.
+
+Go to `/src/config.ts` and change the `SITE` and `BASE` variables.
+
+- `SITE` should be be `https://yourusername.github.io`.
+
+- `BASE` should either be empty if you named the repo `yourusername.github.io` or the name of the repo 
+if you named it something else with a leading `/` (e.g. `/my-docs`).
+
+## Enable github pages
+
+Enable github pages in the repo settings. Go to *SETTINGS &rarr; PAGES &rarr; SOURCE: Github Actions*
+
+Your site should be live after a few minutes.
+
+## Development preview
+
+1. Clone repo locally
+
+```bash
+git clone https://github.com/yourusername/yourrepo.git
+```
+
+2. Install dependencies
+
+```bash
+npm install
+```
+
+3. Start the development server
+
+```bash
+npm run dev
+```
+
+4. Open the development preview at `http://localhost:4321/BASE`
+
+Changes made to the docs will be reflected live.
+
+### Next steps:
+
+- [Add some content](/dogumentation/docs/adding-content)
+- [Configure your template](/dogumentation/docs/configuration)

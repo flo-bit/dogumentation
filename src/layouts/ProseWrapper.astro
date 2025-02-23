@@ -1,0 +1,21 @@
+---
+import { colorBaseClasses, colorAccentClasses } from "src/colors";
+import config from "../config";
+
+const { class: className } = Astro.props;
+---
+
+<div
+  class:list={[
+    "prose prose-img:rounded-2xl dark:prose-invert prose-a:no-underline",
+    "prose-inline-code:font-semibold prose-inline-code:text-accent-600 dark:prose-inline-code:text-accent-400 prose-inline-code:bg-accent-300/20 dark:prose-inline-code:bg-accent-600/10 prose-inline-code:p-1 prose-inline-code:rounded-md",
+    "prose-h1:text-3xl prose-h1:pb-0 prose-headings:mt-8",
+    colorBaseClasses[config.BASE_COLOR],
+    colorAccentClasses[config.ACCENT_COLOR],
+    className,
+  ]}
+>
+  <main data-pagefind-body>
+    <slot />
+  </main>
+</div>

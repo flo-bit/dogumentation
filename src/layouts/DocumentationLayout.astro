@@ -1,0 +1,35 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Sidebar from "../components/Sidebar.astro";
+import Header from "../components/Header.astro";
+import CommandPalette from "../components/search/CommandPalette.svelte";
+import CodeCopyButton from "../components/CodeCopyButton.astro";
+import BaseLayout from "./BaseLayout.astro";
+
+const { title, description, image, id, headings } = Astro.props;
+---
+
+<BaseLayout {title} {description} {image} {id} {headings}>
+  <div class="flex mx-1 sm:mx-4">
+    <div class="w-full my-1 sm:my-8 lg:ml-72 xl:ml-80">
+      <div class="mx-auto max-w-5xl">
+        <slot />
+      </div>
+    </div>
+
+    <CommandPalette client:load />
+    <CodeCopyButton />
+
+    <div
+      class="fixed overflow-y-auto top-0 bottom-0 left-0 h-full -translate-x-72 lg:translate-x-0 lg:w-72 xl:w-80 z-40 border-r border-base-200 dark:border-base-300/10"
+    >
+      <Sidebar {id} {headings} />
+    </div>
+
+    <div
+      class="fixed top-0 left-0 right-0 lg:left-72 xl:left-80 h-16 z-30 border-b border-base-200 dark:border-base-300/10 backdrop-blur-sm"
+    >
+      <Header />
+    </div>
+  </div>
+</BaseLayout>

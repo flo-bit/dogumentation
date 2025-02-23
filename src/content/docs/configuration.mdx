@@ -1,0 +1,85 @@
+---
+title: "Configuration"
+description: "Configure your documentation"
+---
+
+# Configuration
+
+There are some configuration options that can be set in the `src/config.ts` file.
+
+Most importantly you **have** to set the `SITE` and `BASE` variables for deployment 
+(see [Quick Start](/dogumentation/docs/quick-start) for more information).
+
+## Basics
+
+Set your site name, description and favicon.
+
+```ts
+const config = {
+  //...
+
+  SITE_NAME: "Dogumentation",
+	SITE_DESCRIPTION: "Simple, minimalistic documentation template using astro",
+  SITE_FAVICON: "🐶"
+
+  // ...
+}
+```
+
+## Colors
+
+Set the base and accent colors for your site.
+
+Base colors can be `zinc`, `slate`, `neutral`, `stone`, `gray`.
+
+Accent colors can be `red`, `orange`, `amber`, `yellow`, `lime`, `green`, `emerald`, `teal`, `cyan`, `sky`, `blue`, `indigo`, `violet`, `purple`, `fuchsia`, `pink`, `rose`.
+
+```ts
+const config = {
+  //...
+
+  BASE_COLOR: "zinc",
+  ACCENT_COLOR: "cyan"
+
+  // ...
+}
+```
+
+## Social Links
+
+Set the social links for your site.
+
+```ts
+const config = {
+  //...
+
+  SOCIAL_LINKS: {
+    FACEBOOK_URL: "https://facebook.com/your-page",
+    TWITTER_URL: "https://twitter.com/your-page",
+    GITHUB_URL: "https://github.com/your-page",
+    LINKEDIN_URL: "https://linkedin.com/in/your-page",
+    YOUTUBE_URL: "https://youtube.com/your-page",
+    BLUESKY_URL: "https://bluesky.com/your-page",
+    DISCORD_URL: "https://discord.com/your-page",
+    EMAIL: "your-email@example.com"
+  }
+}
+```
+
+Any of the links can be omitted if you don't have a page for that social link.
+
+All included social links will be shown in the header and footer of your site like this:
+
+import SocialIcons from "$components/SocialIcons.astro";
+
+<div class="flex items-center justify-end gap-x-4 p-4 bg-base-100 dark:bg-base-900/50 border border-base-200 dark:border-base-800 rounded-2xl">
+  <SocialIcons />
+</div>
+
+## Start page
+
+The start page will show a button to the first doc in your `src/content/docs` folder (= the first one in the sidebar).
+
+It will also show your site name and description and a screenshot of your app.
+
+Set the screenshot by replacing `src/assets/screen-light.png` and `src/assets/screen-dark.png` with your own images.

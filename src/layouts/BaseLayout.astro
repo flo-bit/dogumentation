@@ -1,0 +1,128 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Sidebar from "../components/Sidebar.astro";
+
+const { title, description, image, id, headings } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="h-full antialiased dark">
+  <head>
+    <BaseHead title={title} description={description} image={image} />
+
+    <script is:inline>
+      let dark = false;
+      if (localStorage.getItem("darkMode")) {
+        dark = JSON.parse(localStorage.getItem("darkMode") ?? "false");
+      } else {
+        dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      }
+
+      var root = document.getElementsByTagName("html")[0];
+      if (dark) {
+        root.classList.add("dark");
+      } else {
+        root.classList.remove("dark");
+      }
+    </script>
+
+    <style is:global>
+      html.dark .astro-code,
+      html.dark .astro-code span {
+        color: var(--shiki-dark);
+      }
+
+      html:not(dark) .astro-code,
+      html:not(dark) .astro-code span {
+        color: var(--shiki-light);
+      }
+
+      pre {
+        @apply overflow-hidden !important;
+        @apply border border-base-300 dark:border-base-800 bg-base-200/50 dark:bg-base-900/50 rounded-2xl !important;
+      }
+
+      .line.highlighted {
+        margin: 0 -24px;
+        padding: 0 24px;
+        position: relative;
+
+        display: inline-block;
+        width: calc(100% + 48px);
+      }
+      .line.highlighted {
+        @apply bg-accent-500/20 dark:bg-accent-700/20;
+      }
+
+      ::selection {
+        @apply bg-accent-300/50 dark:bg-accent-900/40;
+      }
+
+      lite-youtube {
+        @apply rounded-2xl border border-base-300 dark:border-base-800;
+      }
+
+      .prose mark {
+        @apply bg-accent-200 dark:bg-accent-900 text-black dark:text-white;
+      }
+      .MathJax svg {
+        display: inline !important;
+      }
+      :target {
+        scroll-margin-top: 80px;
+      }
+
+      .mobileMenuPopover {
+        /* Closed state transformed off the screen */
+        transform: translateX(-110%);
+        transition:
+          transform 0.1s,
+          overlay 0.1s ease-out;
+        inset: unset;
+
+        /* Styles while the menu is open */
+        &:popover-open {
+          transform: translateX(0);
+        }
+
+        /* Backdrop that overlays other content */
+        &::backdrop {
+          background-color: rgba(0, 0, 0, 0.5);
+        }
+      }
+    </style>
+  </head>
+
+  <body
+    class="bg-base-50 dark:bg-base-950 transition-all duration-150 h-[100dvh]"
+  >
+    <slot />
+
+    <div
+      popover
+      id="mobile-menu"
+      class="mobileMenuPopover bg-base-100 dark:bg-base-900 left-0 top-0 h-[100dvh] w-72 block shadow-lg border-r border-base-300 dark:border-base-800"
+    >
+      <button
+        popovertarget="mobile-menu"
+        popovertargetaction="hide"
+        class="absolute top-4 right-4 text-base-600 dark:text-base-400 hover:text-base-800 dark:hover:text-base-200"
+      >
+        <span class="sr-only">Close Menu</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="size-6"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+
+      <Sidebar {id} {headings} />
+    </div>
+  </body>
+</html>

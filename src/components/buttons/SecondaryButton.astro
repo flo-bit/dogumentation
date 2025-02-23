@@ -1,0 +1,25 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"button"> & HTMLAttributes<"a">;
+
+const { class: className, ...props } = Astro.props;
+
+const classes = [
+  "not-prose inline-flex items-center gap-2 text-xs font-medium bg-base-100 dark:bg-base-900 text-base-950 dark:text-base-100 px-3 py-1.5 rounded-full",
+  "border border-base-200 dark:border-base-800 hover:bg-base-200 dark:hover:bg-base-800 transition-colors duration-200",
+  className,
+];
+---
+
+{
+  props.href ? (
+    <a class:list={classes} {...props}>
+      <slot />
+    </a>
+  ) : (
+    <button class:list={classes} {...props}>
+      <slot />
+    </button>
+  )
+}

@@ -1,0 +1,73 @@
+---
+import { config } from "../config";
+import { getDocs } from "../utils";
+
+const docs = await getDocs();
+
+const { id, headings } = Astro.props;
+---
+
+<div
+  class="mx-8 mt-8 pb-16 text-xl text-base-950 dark:text-base-50 flex flex-col gap-8"
+>
+  <a href={config.BASE} class="flex items-center gap-2">
+    <div class="text-2xl">🐶</div>
+    <div class="text-xl font-bold">{config.SITE_NAME}</div>
+  </a>
+
+  {
+    docs.map((category) => (
+      <div class="flex flex-col gap-3 relative">
+        {category.category ? (
+          <h2 class="text-sm font-bold">
+            {category.category[0].toUpperCase() + category.category.slice(1)}
+          </h2>
+        ) : null}
+
+        <div class="flex flex-col gap-4">
+          {category.docs.map((doc) => (
+            <div
+              class:list={[
+                "text-sm relative",
+                category.category ? "ml-6" : "",
+                id === doc.id
+                  ? "text-accent-600 dark:text-accent-400"
+                  : "text-base-800 dark:text-base-400 hover:text-base-950 dark:hover:text-base-50",
+              ]}
+            >
+              <a href={config.BASE + "/docs/" + doc.id} class="w-full">
+                {doc.data.title}
+              </a>
+
+              {id === doc.id ? (
+                <div class="absolute -inset-2 -z-10 rounded-xl bg-base-200/40 dark:bg-base-900/50" />
+              ) : null}
+
+              {id === doc.id ? (
+                <div class="flex flex-col">
+                  {headings.map(
+                    (heading: { depth: number; text: string; slug: string }) =>
+                      heading.depth === 2 && (
+                        <a
+                          class="mt-2.5 text-sm ml-4 text-base-800 dark:text-base-300 hover:text-base-950 dark:hover:text-base-50"
+                          href={
+                            config.BASE + "/docs/" + doc.id + "#" + heading.slug
+                          }
+                        >
+                          {heading.text}
+                        </a>
+                      )
+                  )}
+                </div>
+              ) : null}
+            </div>
+          ))}
+        </div>
+
+        {category.category ? (
+          <div class="absolute top-8 left-1 bottom-0 w-0.5 border-l border-base-200 dark:border-base-800" />
+        ) : null}
+      </div>
+    ))
+  }
+</div>

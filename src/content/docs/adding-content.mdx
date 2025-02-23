@@ -1,0 +1,67 @@
+---
+title: "Adding content"
+description: "Add content to your docs"
+---
+
+# Adding content
+
+Simply add markdown files ending with `.mdx` to the `/src/content/docs` folder to add content to your docs.
+
+## Frontmatter
+
+All `.mdx` files support frontmatter and **must** have the following two properties:
+
+```mdx
+---
+title: "My Doc"
+description: "This is a doc"
+---
+```
+
+## Order
+
+Docs are ordered alphabetically by default. 
+You can change the order by setting the `order` property to a number in the frontmatter.
+Files with a lower number will be shown first. All files with any order tag will be shown before the files without.
+
+```mdx
+---
+order: 1
+---
+```
+
+## Categories
+
+You can add a category to a doc by setting the `category` property in the frontmatter.
+
+```mdx
+---
+category: "My Category"
+---
+```
+
+Categories are used to group docs together in the sidebar.
+They are also sorted alphabetically by default. 
+You can also set a `categoryOrder` property to at least one file in that category to sort the categories.
+
+```mdx
+---
+categoryOrder: 1
+---
+```
+
+Again categories with a lower number will be shown first and categories without any category order set will be shown last.
+
+Files without a category will be always be shown first.
+
+## Links
+
+All relative links should start with `/BASE/docs/` 
+(with the same `BASE` as the one set in `src/config.ts`).
+
+For example if you want to link to `/src/content/docs/quick-start.mdx`
+you should use the following link:
+
+```mdx
+[Quick Start](/YOUR-BASE/docs/quick-start)
+```

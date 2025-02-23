@@ -1,0 +1,50 @@
+---
+title: "Embeds"
+description: "Show embeds in your documentation"
+category: "Components"
+---
+
+# Embeds
+
+You can show youtube videos, link cards, excalidraw diagrams and github repos in your documentation.
+
+## Youtube
+
+Simply write a youtube url in your markdown like this (with nothing else on the same line):
+
+```mdx
+https://www.youtube.com/watch?v=dQw4w9WgXcQ
+```
+
+https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+## Link Card
+
+Add any other url for a link card like this (again with nothing else on the same line):
+
+```mdx
+https://flo-bit.dev
+```
+
+https://flo-bit.dev
+
+## Excalidraw
+
+You can also show excalidraw diagrams, that will be rendered in the correct dark/light mode like this
+(they **must** be in the `src/assets` folder):
+
+```mdx
+:excalidraw[$assets/excalidraw-demo.svg]
+```
+
+:excalidraw[$assets/excalidraw-demo.svg]
+
+## Github
+
+You can show a github repo card by just writing the url like this (again with nothing else on the same line):
+
+```mdx
+https://github.com/flo-bit/svelte-openai-realtime-api
+```
+
+https://github.com/flo-bit/svelte-openai-realtime-api

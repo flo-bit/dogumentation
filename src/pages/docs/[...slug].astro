@@ -1,0 +1,80 @@
+---
+import { type CollectionEntry, render } from "astro:content";
+import DocumentationLayout from "$layouts/DocumentationLayout.astro";
+import ProseWrapper from "$layouts/ProseWrapper.astro";
+import { getSortedDocs, getNextAndPreviousDocs } from "src/utils";
+import config from "src/config";
+import SecondaryButton from "$components/buttons/SecondaryButton.astro";
+import Footer from "$components/Footer.astro";
+
+export async function getStaticPaths() {
+  const posts = await getSortedDocs();
+  return posts.map((post: any) => ({
+    params: { slug: post.id },
+    props: post,
+  }));
+}
+type Props = CollectionEntry<"docs">;
+
+const post = Astro.props;
+const { Content, headings } = await render(post);
+
+// get next and previous posts
+const { next, previous } = await getNextAndPreviousDocs(post);
+---
+
+<DocumentationLayout
+  {...post.data}
+  title={post.data.title + " | " + config.SITE_NAME}
+  image={post.id + ".png"}
+  id={post.id}
+  headings={headings}
+>
+  <div class="max-w-3xl lg:max-w-4xl ml-2 h-full p-4 mt-8 mb-16">
+    <ProseWrapper>
+      <Content />
+    </ProseWrapper>
+
+    <div class="flex justify-between my-16">
+      <div>
+        {
+          previous ? (
+            <div class="flex flex-col gap-3 items-start">
+              <SecondaryButton href={config.BASE + "/docs/" + previous.id}>
+                <span aria-hidden="true">&larr;</span>
+                Previous
+              </SecondaryButton>
+              <a
+                href={config.BASE + "/docs/" + previous.id}
+                class="text-lg dark:text-base-300 font-semibold"
+              >
+                {previous.data.title}
+              </a>
+            </div>
+          ) : null
+        }
+      </div>
+
+      <div>
+        {
+          next ? (
+            <div class="flex flex-col gap-3 items-end">
+              <SecondaryButton href={config.BASE + "/docs/" + next.id}>
+                <span aria-hidden="true">&rarr;</span>
+                Next
+              </SecondaryButton>
+              <a
+                href={config.BASE + "/docs/" + next.id}
+                class="text-lg dark:text-base-300 font-semibold"
+              >
+                {next.data.title}
+              </a>
+            </div>
+          ) : null
+        }
+      </div>
+    </div>
+
+    <Footer />
+  </div>
+</DocumentationLayout>

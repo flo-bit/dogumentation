@@ -1,0 +1,106 @@
+---
+import { Image } from "astro:assets";
+
+import BaseLayout from "$layouts/BaseLayout.astro";
+import config from "../config";
+
+import Header from "$components/Header.astro";
+import CommandPalette from "$components/search/CommandPalette.svelte";
+
+import screenlight from "$assets/screen-light.png";
+import screendark from "$assets/screen-dark.png";
+import { getSortedDocs } from "src/utils";
+import PrimaryButton from "$components/buttons/PrimaryButton.astro";
+
+const docs = await getSortedDocs();
+---
+
+<BaseLayout title={config.SITE_NAME} description={config.SITE_DESCRIPTION}>
+  <div class="fixed top-0 left-0 right-0 h-16 z-30">
+    <Header />
+  </div>
+
+  <CommandPalette client:load />
+
+  <div
+    class="relative isolate overflow-hidden bg-base-50 dark:bg-base-950 w-full"
+  >
+    <div
+      class="absolute left-[calc(50%-4rem)] top-10 -z-10 transform-gpu blur-3xl sm:left-[calc(50%-18rem)] lg:left-48 lg:top-[calc(50%-30rem)] xl:left-[calc(50%-24rem)]"
+      aria-hidden="true"
+    >
+      <div
+        class="aspect-[1108/632] w-[69.25rem] bg-gradient-to-r from-accent-300 to-accent-600 opacity-20"
+        style="clip-path: polygon(73.6% 51.7%, 91.7% 11.8%, 100% 46.4%, 97.4% 82.2%, 92.5% 84.9%, 75.7% 64%, 55.3% 47.5%, 46.5% 49.4%, 45% 62.9%, 50.3% 87.2%, 21.3% 64.1%, 0.1% 100%, 5.4% 51.1%, 21.4% 63.9%, 58.9% 0.2%, 73.6% 51.7%)"
+      >
+      </div>
+    </div>
+    <div
+      class="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40"
+    >
+      <div class="mx-auto max-w-2xl shrink-0 lg:mx-0 lg:pt-8">
+        <div class="mt-32 sm:mt-44 lg:mt-24">
+          <!-- <a href="#" class="inline-flex space-x-6">
+            <span
+              class="rounded-full bg-accent-400/10 dark:bg-accent-500/10 px-3 py-1 text-sm/6 font-semibold text-accent-600 dark:text-accent-400 ring-1 ring-inset ring-accent-500/20"
+              >What's new</span
+            >
+            <span
+              class="inline-flex items-center space-x-2 text-sm/6 font-medium text-base-700 dark:text-base-300"
+            >
+              <span>Just shipped v1.0</span>
+              <svg
+                class="size-5 text-base-500"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+                data-slot="icon"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z"
+                  clip-rule="evenodd"></path>
+              </svg>
+            </span>
+          </a> -->
+        </div>
+        <h1
+          class="mt-10 text-pretty text-4xl sm:text-5xl font-semibold tracking-tight text-base-900 dark:text-white md:text-7xl"
+        >
+          {config.SITE_FAVICON}
+          {config.SITE_NAME}
+        </h1>
+        <p
+          class="mt-8 text-pretty text-lg font-medium text-base-600 dark:text-base-400 sm:text-xl/8"
+        >
+          {config.SITE_DESCRIPTION}
+        </p>
+        <div class="mt-10 flex items-center gap-x-6">
+          <PrimaryButton href={`${config.BASE}/docs/${docs[0].id}`}>
+            {docs[0].data.title}
+          </PrimaryButton>
+        </div>
+      </div>
+      <div
+        class="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32"
+      >
+        <div class="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
+          <Image
+            src={screenlight}
+            alt="App screenshot"
+            width="2432"
+            height="1442"
+            class="w-[76rem] rounded-2xl bg-base-900/5 shadow-2xl ring-1 ring-base-800/10 dark:hidden"
+          />
+          <Image
+            src={screendark}
+            alt="App screenshot"
+            width="2432"
+            height="1442"
+            class="w-[76rem] rounded-2xl bg-white/5 shadow-2xl ring-1 ring-white/10 dark:block hidden"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

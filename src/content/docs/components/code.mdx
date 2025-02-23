@@ -1,0 +1,56 @@
+---
+title: "Code and Math"
+description: "How to show inline and multiline code and math in your documentation"
+category: "Components"
+---
+
+# Code
+
+## Inline Code
+
+Write inline code like this:
+
+```mdx
+this is some `inline code`
+```
+
+this is some `inline code`
+
+## Multiline Code
+
+Write multiline code like this (specify the language for syntax highlighting):
+
+import { Code } from "astro:components";
+
+<Code lang="mdx" code={`\`\`\`js
+console.log("this is some code");
+\`\`\`
+`} />
+
+```js
+console.log("this is some code");
+```
+
+## Math
+
+Write inline math like this:
+
+```mdx
+Inline math: $a_x = x^2$
+```
+
+Inline math: $a_x = x^2$
+
+Write block math like this:
+
+```mdx
+$$
+\int_0^\infty \frac{x^3}{e^x} \, dx
+$$
+```
+
+$$
+\int_0^\infty \frac{x^3}{e^x} \, dx
+$$
+
+
