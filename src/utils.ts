@@ -47,7 +47,7 @@ export const getDocs = async () => {
 
 export const getNextAndPreviousDocs = async (doc: any) => {
   const docs = await getSortedDocs();
-  console.log(docs.map((d) => d.id));
+
   const index = docs.findIndex((d) => d.id === doc.id);
   return {
     previous: index > 0 ? docs[index - 1] : null,

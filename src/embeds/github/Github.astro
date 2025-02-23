@@ -1,6 +1,4 @@
 ---
-import { load } from "cheerio";
-
 interface Props {
   href: string;
   src: string;
@@ -10,36 +8,19 @@ interface Props {
   class?: string;
 }
 
-const {
-  href,
-  src,
-  alt,
-  class: className,
-  target = "_blank",
-  props,
-} = Astro.props;
-
-console.log(href, src);
+const { href, src, class: className, target = "_blank", props } = Astro.props;
 
 const url = href || src;
-// get repo name from href
-// https://github.com/vitest-dev/vitest
-// get repo name and owner from href starting from beginning of href
+
 const split = url.split("github.com/");
 const repoName = split[1].split("/")[1];
 const owner = split[1].split("/")[0];
-console.log(repoName, owner);
 const response = await fetch(
   `https://api.github.com/repos/${owner}/${repoName}`
 );
 const data = await response.json();
 
-console.log(data);
-
 const description = data.description;
-const stars = data.stargazers_count;
-const forks = data.forks_count;
-
 const avatarUrl = data.owner?.avatar_url;
 ---
 

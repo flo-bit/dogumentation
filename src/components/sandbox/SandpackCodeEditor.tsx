@@ -20,19 +20,13 @@ export const SandpackCodeEditor = ({ files }: { files: Record<string, { code: st
 	const [stylingFile, setStylingFile] = useState<string | null>();
 
 	useEffect(() => {
-		console.log("stylingFile", stylingFile);
-	}, [stylingFile]);
-
-	useEffect(() => {
 		// Initial theme check
 		const dark = document.documentElement.classList.contains("dark");
-		console.log("dark", dark);
 		setIsDark(dark);
 		setStylingFile(getStyling(dark));
 
 		// Listen for theme changes
 		const handleThemeChange = (e: CustomEvent<{ darkMode: boolean }>) => {
-			console.log("handleThemeChange", e.detail.darkMode);
 			setIsDark(e.detail.darkMode);
 			setStylingFile(getStyling(e.detail.darkMode));
 		};

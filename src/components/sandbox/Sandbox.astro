@@ -8,15 +8,17 @@ const actualFolder = folder.startsWith("/")
   : `/src/examples/${folder}`;
 
 // import as raw
-const files = import.meta.glob(`/src/examples/**`, { as: "raw" });
+const files = import.meta.glob(`/src/examples/**`, {
+  query: "?raw",
+  import: "default",
+});
 
 let loadedFiles: Record<string, { code: string; active: boolean }> = {};
 
 for (const file of Object.keys(files)) {
   if (!file.startsWith(actualFolder)) continue;
-  console.log(file, active);
   loadedFiles[file.replace(actualFolder, "")] = {
-    code: await files[file](),
+    code: (await files[file]()) as string,
     active: file.endsWith(active),
   };
 }
