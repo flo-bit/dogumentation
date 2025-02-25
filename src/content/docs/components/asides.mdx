@@ -1,0 +1,53 @@
+---
+title: "Asides"
+description: "How to show asides in your documentation"
+category: "Components"
+---
+
+# Asides
+
+Asides are a way to show additional information in your documentation.
+
+```jsx
+import ErrorAside from "$components/asides/ErrorAside.astro";
+
+<ErrorAside title="This is an error aside">
+  This is an error aside.
+</ErrorAside>
+```
+
+### Result:
+
+import ErrorAside from "$components/asides/ErrorAside.astro";
+import WarningAside from "$components/asides/WarningAside.astro";
+import SuccessAside from "$components/asides/SuccessAside.astro";
+import InfoAside from "$components/asides/InfoAside.astro";
+
+<ErrorAside title="This is an error aside">
+  This is an error aside.
+</ErrorAside>
+
+There are 4 different asides:
+
+- `ErrorAside`
+- `WarningAside`
+- `SuccessAside`
+- `InfoAside`
+
+<ErrorAside title="This is an error aside">
+  This is an error aside.
+</ErrorAside>
+
+<WarningAside title="This is a warning aside">
+  This is a warning aside.
+</WarningAside>
+
+<SuccessAside title="This is a success aside">
+  This is a success aside.
+</SuccessAside>
+
+<InfoAside title="This is an info aside">
+  This is an info aside.
+</InfoAside>
+
+

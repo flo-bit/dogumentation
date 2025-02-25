@@ -12,15 +12,16 @@ You can show interactive code examples in your documentation with the sandbox co
 ```astro
 import Sandbox from "$components/sandbox/";
 
-<Sandbox folder="example1" active="Counter.js" />
+<Sandbox folder="example1" active="Counter.js" template="react" />
 ```
 
+### Result:
 
 import Sandbox from "$components/sandbox/";
 
-<Sandbox folder="example1" active="Counter.js" />
+<Sandbox folder="example1" active="Counter.js" template="react" />
 
-Your folder **must** be in the `src/examples` folder.
+Your folder **must** be in the `src/examples` folder, either just use the name of the folder or use the full path (e.g. `/src/examples/example1`).
 
 The `active` file is the file that will be shown when the sandbox is opened.
 

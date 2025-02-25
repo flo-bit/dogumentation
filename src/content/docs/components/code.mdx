@@ -2,6 +2,7 @@
 title: "Code and Math"
 description: "How to show inline and multiline code and math in your documentation"
 category: "Components"
+order: 1
 ---
 
 # Code
@@ -14,18 +15,22 @@ Write inline code like this:
 this is some `inline code`
 ```
 
+### Result:
+
 this is some `inline code`
 
 ## Multiline Code
 
 Write multiline code like this (specify the language for syntax highlighting):
 
-import { Code } from "astro:components";
 
-<Code lang="mdx" code={`\`\`\`js
+````mdx
+```js
 console.log("this is some code");
-\`\`\`
-`} />
+```
+````
+
+### Result:
 
 ```js
 console.log("this is some code");
@@ -39,6 +44,8 @@ Write inline math like this:
 Inline math: $a_x = x^2$
 ```
 
+### Result:
+
 Inline math: $a_x = x^2$
 
 Write block math like this:
@@ -48,6 +55,8 @@ $$
 \int_0^\infty \frac{x^3}{e^x} \, dx
 $$
 ```
+
+### Result:
 
 $$
 \int_0^\infty \frac{x^3}{e^x} \, dx

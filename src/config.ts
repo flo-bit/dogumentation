@@ -16,7 +16,7 @@ export const config: Config = {
 	SOCIAL_LINKS: {
 	  FACEBOOK_URL: "",
 	  TWITTER_URL: "",
-	  GITHUB_URL: "#",
+	  GITHUB_URL: "https://github.com/flo-bit/dogumentation",
 	  LINKEDIN_URL: "",
 	  YOUTUBE_URL: "",
 	  BLUESKY_URL: "",

@@ -2,6 +2,7 @@ import { Sandpack } from "@codesandbox/sandpack-react";
 import { useEffect, useState } from "react";
 import colors from "tailwindcss/colors";
 import config from "../../config";
+import type { SandboxTemplate } from ".";
 
 function getColor(color: string, shade: '50' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900' | '950') {
 	return colors[color.toLowerCase() as keyof typeof colors][shade];
@@ -14,7 +15,7 @@ function getStyling(isDark: boolean) {
 	${isDark ? "@apply dark;" : ""}
 }`
 }
-export const SandpackCodeEditor = ({ files }: { files: Record<string, { code: string; active: boolean }> }) => {
+export const SandpackCodeEditor = ({ files, template }: { files: Record<string, { code: string; active: boolean }>, template: SandboxTemplate }) => {
 	const [isDark, setIsDark] = useState(true);
 
 	const [stylingFile, setStylingFile] = useState<string | null>();
