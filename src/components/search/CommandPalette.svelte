@@ -37,22 +37,16 @@
     for (let i = 0; i < search.results.length && i < 5; i++) {
       let result = await search.results[i].data();
 
-      let excerpt = result.excerpt;
-      // replace <mark> tags with <span class="bg-pink-600/10">
-      excerpt = excerpt.replaceAll(
-        "<mark>",
-        '<span class="bg-accent-500/20 rounded-md p-0.5">'
-      );
-      excerpt = excerpt.replaceAll("</mark>", "</span>");
-
-      newResults[i] = {
-        title: result.meta.title,
-        content: excerpt,
-        href: result.url,
-      };
+      for(let j = 0; j < result.sub_results.length; j++) {
+        newResults.push({
+          title: result.sub_results[j].title,
+          content: result.meta.title,
+          href: result.sub_results[j].url,
+        });
+      }
     }
 
-    results = Object.values(newResults);
+    results = newResults.slice(0, 5);
   };
 
   export let value: string = "";
@@ -146,9 +140,8 @@
                   currentSelection < results.length
                 ) {
                   window.location.href = results[currentSelection].href;
-                } else {
-                  $showSearch = false;
                 }
+                $showSearch = false;
               }
 
               // on arrow down
@@ -206,6 +199,9 @@
                 <!-- Active: "bg-indigo-600 text-white" -->
                 {#each results as result, i}
                   <a
+                    on:click={() => {
+                      $showSearch = false;
+                    }}
                     href={result.href}
                     class="w-full {currentSelection === i
                       ? 'bg-white/5'
