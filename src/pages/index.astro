@@ -16,9 +16,7 @@ const docs = await getSortedDocs();
 ---
 
 <BaseLayout title={config.SITE_NAME} description={config.SITE_DESCRIPTION}>
-  <div class="fixed top-0 left-0 right-0 h-16 z-30">
-    <Header />
-  </div>
+  <Header fullWidth />
 
   <CommandPalette client:load />
 

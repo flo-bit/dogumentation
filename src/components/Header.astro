@@ -3,14 +3,21 @@ import config from "../config";
 import ThemeToggle from "./ThemeToggle.astro";
 import Search from "./search/Search.svelte";
 import SocialIcons from "./SocialIcons.astro";
+
+const { fullWidth = false } = Astro.props;
 ---
 
-<header class="w-full">
+<header
+  class:list={[
+    "fixed top-0 right-0 left-0 z-30",
+    fullWidth ? "" : "lg:left-72 xl:left-80",
+  ]}
+>
   <nav
-    class="flex items-center h-16 justify-between lg:justify-end p-2 px-6 w-full"
+    class="flex items-center z-10 h-16 justify-between lg:justify-end p-2 px-6 w-full"
     aria-label="Global"
   >
-    <div class="lg:hidden">
+    <div class="lg:hidden z-10">
       <button popovertarget="mobile-menu">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +32,7 @@ import SocialIcons from "./SocialIcons.astro";
         </svg>
       </button>
     </div>
-    <div class="flex gap-x-8 items-center">
+    <div class="flex gap-x-8 items-center z-10">
       <div class="flex gap-x-4 items-center">
         {config.SEARCH_ENABLED ? <Search client:visible /> : null}
 
@@ -36,4 +43,54 @@ import SocialIcons from "./SocialIcons.astro";
       </div>
     </div>
   </nav>
+  <div
+    class="backdrop inset-0 absolute backdrop-blur-md pointer-events-none bg-gradient-to-b from-base-50/90 via-base-50/0 dark:from-base-950/90 dark:via-base-950/0"
+  >
+  </div>
+
+  <div
+    class="backdrop-edge absolute left-0 right-0 bottom-0 bg-base-900/10 dark:bg-base-500/10 backdrop-blur translate-y-full pointer-events-none"
+  >
+  </div>
 </header>
+
+<style>
+  /** better frosted glass effect adopted from https://www.joshwcomeau.com/css/backdrop-filter/ */
+  header {
+    --thickness: 1px;
+  }
+
+  @supports (mask-image: none) or (-webkit-mask-image: none) {
+    .backdrop {
+      height: 200%;
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        black 0% 50%,
+        transparent 50% 100%
+      );
+      mask-image: linear-gradient(
+        to bottom,
+        black 0% 50%,
+        transparent 50% 100%
+      );
+    }
+    .backdrop-edge {
+      height: 100%;
+      inset: 0;
+      -webkit-mask-image: linear-gradient(
+        to bottom,
+        black 0,
+        black var(--thickness),
+        transparent var(--thickness)
+      );
+      mask-image: linear-gradient(
+        to bottom,
+        black 0,
+        black var(--thickness),
+        transparent var(--thickness)
+      );
+
+      filter: brightness(1.5);
+    }
+  }
+</style>
